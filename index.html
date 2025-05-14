@@ -1,0 +1,237 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Roll Your Luck</title>
+        <style>
+            #body{
+                background-image: url('dice bg.jpeg');
+                background-size: 100% 100%;
+                /* background-repeat: no-repeat; */
+                /* background-color: peachpuff; */
+            }
+            .bu{
+                width:200px;
+                height:300px;
+                margin-right: 10px;
+                border-color: white;
+                cursor: pointer;
+                background-image: url('bg.png');
+                /* background-size: contain; */
+                /* background-size: 100% 100%; */
+            }
+            #play{
+                font-size: 24px;
+                padding: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
+                cursor: pointer;
+                background-color: yellow;
+                /* color:red; */
+                border-radius: 15px;
+            }
+            #play:hover{
+                background-color: cyan;
+                /* color:; */
+                box-shadow: 2px 2px white;
+            }
+            #err{
+                color: chartreuse;
+                font-size: 24px;
+            }
+            #dice{
+                display: none;
+                /* display: block; */
+                /* background-image: url('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/7803765/dice-background-clipart-md.png'); */
+                /* background-size: 100% 100%; */
+                
+            }
+            #roll{
+                cursor: pointer;
+                font-size: 28px;
+                padding: 5px;
+                border-radius: 10px;
+                background-color: yellow;
+                border-color: blue;
+                box-shadow: 2px 2px blue;
+                width: 100;
+            }
+            #roll:hover{
+                cursor: pointer;
+                background-color: cyan;
+                border-color: rebeccapurple;
+                box-shadow: 2px 2px rebeccapurple;
+            }
+            #luck{
+                display: block;
+            }
+            #playagain{
+                display: none;
+                position: absolute;
+                top: 40%;
+                left: 45%;
+            }
+            #card{
+                display: none;
+                /* border: 2px solid blue; */
+                /* font-weight: bold; */
+                padding: 5px;
+                font-size: 26px;
+                /* width: 500px; */
+            }
+            #card button{
+                cursor: pointer;
+                font-size: 28px;
+                padding: 5px;
+                border-radius: 10px;
+                background-color: yellow;
+                border-color: blue;
+                box-shadow: 2px 2px blue; */
+                /* width: 200;
+            }
+            #card button:hover{
+                cursor: pointer;
+                background-color: cyan;
+                border-color: rebeccapurple;
+                box-shadow: 2px 2px rebeccapurple;
+            }
+            /* #card{
+                display: none;
+                position: fixed;
+                border: 1px solid;
+                overflow: auto;
+                top:50%;
+                left:50%;
+            } */
+        </style>
+    </head>
+    <body id="body">
+        <center>
+            <h1 id="msg" style="color: magenta;">Click the box to check your luck for how many times to roll the dice</h1>
+            <div id="luck">
+                <button onclick="luck('3')" class="bu" id="3"></button>
+                <button onclick="luck('5')" class="bu" id="5"></button>
+                <button onclick="luck('6')" class="bu" id="6"></button>
+                <button onclick="luck('9')" class="bu" id="9"></button>
+                <br>
+                <br>
+                <p id="err"></p>
+                <button onclick="play()" id="play">PLAY</button>
+            </div>
+            <div id="dice">
+                <div style="justify-content: space-around;">
+                    <h2 style="display: inline; margin-left: 100px; background-color: cyan; font-size: 28px; padding: 10px;">Score: <spam id="sco">0</spam></h2>
+                    <h2 style="display: inline; margin-left: 50px; background-color: cyan; font-size: 28px; padding: 10px;" >Highest Score: <spam id="highsco">0</spam></h2>
+                </div>
+                <h2 style="font-size: 28px; padding: 5px; ">Chances: <spam id="cha">0</spam></h2>
+                <br>
+                <br>
+                <img src="1.webp" width="150px" height="150px" id="diceimg"/>
+                <br>
+                <br>
+                <button onclick="roll()" id="roll" >Roll</button>
+                <p id="sa"></p>
+            </div>
+            <button id="playagain">Play Again</button>
+            <div id="card">
+                <center>
+                    <p id="m1"></p>
+                    <p id="m2"></p>
+                    <button onclick="playagain()">Play Again</button>
+                </center>
+            </div>
+
+        </center>
+        <script>
+            let chance=0;
+            function luck(x)
+            {
+                let b1=document.getElementById('3').style.backgroundImage;
+                let b2=document.getElementById('5').style.backgroundImage;
+                let b3=document.getElementById('6').style.backgroundImage;
+                let b4=document.getElementById('9').style.backgroundImage;
+                if(b1=="" && b2=="" && b3=="" && b4==""){
+                    let a=[3,5,6,9];
+                    let i=["url('three.png')","url('fiv.webp')","url('six.jpeg')","url('nine.png')"]
+                    r=Math.floor(Math.random()*4);
+                    chance=a[r];
+                    document.getElementById(x).style.backgroundImage=i[r];
+                    document.getElementById(x).style.borderColor='chartreuse';
+                    document.getElementById(x).style.backgroundSize="100% 100%";
+                    document.getElementById('err').innerHTML="Congratulation You Have "+chance+" Chances to Roll the Dice";
+                    document.getElementById('err').style.color='chartreuse';
+                    // document.getElementById(x).innerHTML=a[r];
+                }
+            }
+            function play()
+            {
+                let b1=document.getElementById('3').style.backgroundImage;
+                let b2=document.getElementById('5').style.backgroundImage;
+                let b3=document.getElementById('6').style.backgroundImage;
+                let b4=document.getElementById('9').style.backgroundImage;
+                if(b1=="" && b2=="" && b3=="" && b4=="")
+                {
+                    document.getElementById('err').innerHTML="Select one box";
+                    document.getElementById('err').style.color='red';
+                    return;
+                }
+                document.getElementById('body').style.backgroundImage="url('')";
+                document.getElementById('body').style.backgroundColor="peachpuff";
+                document.getElementById('msg').style.display="none";
+                document.getElementById('luck').style.display="none";
+                document.getElementById('dice').style.display="block";
+                // document.getElementById('body').style.backgroundImage="url('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/7803765/dice-background-clipart-md.png')"
+                document.getElementById('cha').innerText=chance;
+            }
+            let s=0;
+            let highscore=localStorage.getItem('dicescore')||0;
+            document.getElementById('highsco').innerHTML=highscore;
+            function roll()
+            {
+                if(chance>=1)
+                {
+                    document.getElementById('roll').style.display="none";
+                    document.getElementById('diceimg').src="dice-roll-dice.gif";
+                    setTimeout(()=>{
+                        let a=["1.webp","2.webp","3.webp","4.webp","5.webp","6.webp"]
+                        r=Math.floor(Math.random()*6);
+                        document.getElementById('diceimg').src=a[r];
+                        s+=r+1;
+                        chance-=1;
+                        document.getElementById('cha').innerHTML=chance;
+                        document.getElementById('sco').innerHTML=s;
+                        if(s>highscore)
+                        {
+                            localStorage.setItem('dicescore',s);
+                            document.getElementById('highsco').innerHTML=s;
+                        }
+                        document.getElementById('roll').style.display="block";
+
+                    },1000);
+                    if(chance==1)
+                    {
+                        setTimeout(()=>{
+                            document.getElementById('card').style.display="block";
+                            let hisc=localStorage.getItem('dicescore');
+                            if(s<hisc){
+                                let diff=hisc-s;
+                                document.getElementById('m1').innerHTML="if You Score "+diff+" you will beat the Highest Score, but Chances are over";
+                                document.getElementById('m2').innerHTML="To Beat the Highest score you play again";
+                            }
+                            else{
+                                document.getElementById('m1').innerHTML="You beated the highest Score.";
+                                // document.getElementById('m2').innerHTML="";
+                            }
+                            document.getElementById('diceimg').style.display='none';
+                            document.getElementById('roll').style.display='none';
+                        },1150);
+                    }
+                }    
+            }
+            function playagain(){
+                location.reload();  
+            }
+
+        </script>
+    </body>
+</html>
