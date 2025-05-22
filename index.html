@@ -1,12 +1,13 @@
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
         <title>Roll Your Luck</title>
         <style>
             #body{
                 background-image: url('dice bg.jpeg');
                 background-size: 100% 100%;
+                margin-top: 2%;
                 /* background-repeat: no-repeat; */
                 /* background-color: peachpuff; */
             }
@@ -72,6 +73,9 @@
                 left: 45%;
             }
             #card{
+                border: 2px solid black;
+                background-color: pink;
+                width: 800;
                 display: none;
                 /* border: 2px solid blue; */
                 /* font-weight: bold; */
@@ -84,10 +88,11 @@
                 font-size: 28px;
                 padding: 5px;
                 border-radius: 10px;
+                margin-bottom: 20px;
                 background-color: yellow;
                 border-color: blue;
-                box-shadow: 2px 2px blue; */
-                /* width: 200;
+                box-shadow: 2px 2px blue;
+                /* width: 200; */
             }
             #card button:hover{
                 cursor: pointer;
@@ -175,8 +180,8 @@
                     document.getElementById('err').style.color='red';
                     return;
                 }
-                document.getElementById('body').style.backgroundImage="url('')";
-                document.getElementById('body').style.backgroundColor="peachpuff";
+                document.getElementById('body').style.backgroundImage="url('bg1.jpg')";
+                /* document.getElementById('body').style.backgroundColor="peachpuff"; */
                 document.getElementById('msg').style.display="none";
                 document.getElementById('luck').style.display="none";
                 document.getElementById('dice').style.display="block";
@@ -213,15 +218,14 @@
                         setTimeout(()=>{
                             document.getElementById('card').style.display="block";
                             let hisc=localStorage.getItem('dicescore');
-                            if(s<hisc){
-                                let diff=hisc-s;
-                                document.getElementById('m1').innerHTML="if You Score "+diff+" you will beat the Highest Score, but Chances are over";
-                                document.getElementById('m2').innerHTML="To Beat the Highest score you play again";
-                            }
-                            else{
-                                document.getElementById('m1').innerHTML="You beated the highest Score.";
-                                // document.getElementById('m2').innerHTML="";
-                            }
+                            if (s < hisc) {
+                        let diff = hisc - s;
+                        document.getElementById('m1').innerHTML = "You needed " + diff + " more points to beat the highest score, but your chances are over.";
+                        document.getElementById('m2').innerHTML = "Try again to beat the highest score!";
+                    } else {
+                        document.getElementById('m1').innerHTML = "Congratulations! You beat the highest score.";
+                    }
+
                             document.getElementById('diceimg').style.display='none';
                             document.getElementById('roll').style.display='none';
                         },1150);
